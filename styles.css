@@ -1,0 +1,261 @@
+:root{
+  --bg: #fffaf6;
+  --card-bg: #fff;
+  --accent: #ff6b81;
+  --muted: #6b6b6b;
+  --shadow: rgba(0,0,0,0.12);
+  --glass: rgba(255,255,255,0.7);
+  --max-width: 900px;
+  --tap-size: 56px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  background: linear-gradient(180deg,#fffaf6 0%, #fff1f8 100%);
+  color:#222;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  min-height:100vh;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Header */
+.site-header{
+  width:100%;
+  max-width:var(--max-width);
+  padding:0.9rem;
+  display:flex;
+  gap:0.6rem;
+  align-items:center;
+  justify-content:space-between;
+}
+.site-header h1{margin:0; font-size:1.2rem}
+.subtitle{margin:0; color:var(--muted); font-size:0.88rem}
+
+/* Controls */
+.controls{display:flex; gap:0.45rem}
+.btn{
+  background:var(--card-bg);
+  border:1px solid #efe9ee;
+  padding:0.6rem 0.9rem;
+  border-radius:12px;
+  cursor:pointer;
+  box-shadow: 0 8px 20px var(--shadow);
+  font-size:0.95rem;
+  min-height:44px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.btn:active{transform:translateY(1px)}
+.btn.accent{
+  background: linear-gradient(90deg,#ff9ab0,#ff6b81);
+  color:white;
+  border: none;
+}
+
+/* Main layout - móvil prioritario: una columna */
+.container{
+  width:100%;
+  max-width:var(--max-width);
+  padding:0.9rem;
+  display:grid;
+  grid-template-columns: 1fr;
+  gap:0.9rem;
+}
+
+/* Panels */
+.panel{
+  background:var(--card-bg);
+  border-radius:14px;
+  padding:0.9rem;
+  box-shadow: 0 10px 30px var(--shadow);
+}
+
+/* Game board */
+.game-stats{display:flex; gap:1rem; color:var(--muted); margin-bottom:0.6rem; font-size:0.95rem}
+.board{
+  display:grid;
+  gap:0.5rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Card style - flip effect */
+.card{
+  perspective:1000px;
+  width:100%;
+  aspect-ratio: 3 / 4;
+  position:relative;
+  min-height:84px;
+  border-radius:12px;
+  padding:0;
+  overflow:visible;
+}
+.card .inner{
+  position:absolute;
+  inset:0;
+  transition: transform 320ms cubic-bezier(.2,.9,.3,1);
+  transform-style:preserve-3d;
+  border-radius:12px;
+}
+.card.flipped .inner{
+  transform: rotateY(180deg);
+}
+.face{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  backface-visibility:hidden;
+  border-radius:12px;
+  font-size:2.6rem;
+  user-select:none;
+  -webkit-user-select:none;
+}
+.face.front{
+  background:linear-gradient(180deg,#fff,#fff7fb);
+  border:1px solid #f0e9ee;
+  transform: rotateY(180deg);
+}
+.face.back{
+  background: linear-gradient(180deg,#fff7f9,#fff1f3);
+  border:1px dashed #ffd9e2;
+  color:var(--muted);
+  font-size:1.1rem;
+  font-weight:600;
+}
+
+/* Picker panel */
+.flower-picker{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.55rem;
+  margin-top:0.4rem;
+}
+.picker-item{
+  width:var(--tap-size);
+  height:var(--tap-size);
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--glass);
+  cursor:pointer;
+  font-size:1.8rem;
+  border:1px solid rgba(0,0,0,0.04);
+  transition: transform 120ms;
+  touch-action: manipulation;
+}
+.picker-item:active{transform: translateY(2px)}
+.picker-item:hover{transform:translateY(-4px)}
+.picker-item.selected{box-shadow: 0 10px 26px rgba(0,0,0,0.12); transform:scale(1.05)}
+
+/* Phrase box */
+.phrase-box{
+  margin-top:0.7rem;
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0.6rem;
+  border-radius:10px;
+  background: linear-gradient(180deg,#fff,#fffbee);
+  text-align:center;
+  color:#5a2a3a;
+  font-weight:600;
+  font-size:0.98rem;
+}
+
+/* Night overlay - full screen and touch friendly */
+.night-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.99);
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  z-index:9999;
+  overflow:hidden;
+  padding-top:48px;
+  touch-action:none;
+}
+/* Si tiene hidden, forzamos que no se muestre (protección si JS falla) */
+.night-overlay[hidden]{
+  display:none !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+}
+.close-night{
+  position:absolute;
+  top:14px;
+  right:14px;
+  background:rgba(255,255,255,0.06);
+  color:white;
+  border:1px solid rgba(255,255,255,0.12);
+  padding:0.5rem 0.7rem;
+  border-radius:12px;
+  font-size:1.2rem;
+  cursor:pointer;
+  z-index:10010; /* asegurar que siempre sea visible */
+  touch-action: manipulation;
+}
+.night-overlay .hint{
+  color:rgba(255,255,255,0.7);
+  position:absolute;
+  top:14px;
+  left:14px;
+  font-size:0.9rem;
+}
+
+/* Growing flower animation: aparece pequeña y crece hasta una escala mayor, se queda y desaparece suavemente */
+.growing-flower{
+  position:absolute;
+  transform-origin: center center;
+  will-change: transform, opacity;
+  pointer-events:none;
+  user-select:none;
+  -webkit-user-select:none;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,0.35));
+  animation: growAndFade 2800ms cubic-bezier(.2,.9,.3,1) forwards;
+  opacity:0;
+}
+@keyframes growAndFade{
+  0% { transform: translateY(12vh) scale(0.05) rotate(-10deg); opacity:0; }
+  10% { opacity:1; }
+  40% { transform: translateY(0vh) scale(1.05) rotate(6deg); opacity:1; }
+  70% { transform: translateY(-6vh) scale(1.12) rotate(-4deg); opacity:0.9; }
+  100% { transform: translateY(-18vh) scale(1.15) rotate(2deg); opacity:0; }
+}
+
+/* Body class to prevent scroll when overlay open */
+body.overlay-open{
+  overflow: hidden;
+  touch-action: none;
+}
+
+/* Footer & hints */
+.site-footer{padding:0.8rem; color:var(--muted); font-size:0.85rem}
+
+/* Mobile adjustments */
+.hint-mobile{margin-top:0.6rem; color:var(--muted); font-size:0.9rem}
+
+/* Very small phones */
+@media (max-width:420px){
+  :root{ --tap-size: 52px }
+  .board{ grid-template-columns: repeat(2, 1fr); }
+  .face{ font-size:2.1rem }
+  .card{ min-height:96px }
+  .btn{ padding:0.55rem 0.8rem; font-size:0.92rem }
+}
+@media (min-width:421px) and (max-width:700px){
+  :root{ --tap-size: 56px }
+  .board{ grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width:701px){
+  .board{ grid-template-columns: repeat(4, 1fr); }
+}

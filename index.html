@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <title>Jueguito dinámico para mi PIRINOLA</title>
+  <meta name="theme-color" content="#ff6b81" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div>
+      <h1>Jueguito dinamico para mi PIRINOLA </h1>
+    </div>
+    <div class="controls">
+      <button id="restartBtn" class="btn">Reiniciar</button>
+      <button id="nightBtn" class="btn accent" aria-haspopup="true" aria-controls="nightOverlay">Noche — Florecer</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="panel game-panel" aria-labelledby="gameTitle">
+      <h2 id="gameTitle">Juego de Memoria</h2>
+      <div class="game-stats">
+        <span id="moves">Movimientos: 0</span>
+        <span id="matches">Parejas: 0</span>
+      </div>
+      <div id="board" class="board" aria-live="polite"></div>
+      <p class="hint-mobile">Toca una carta para darle la vuelta. Buena suerte 🌸 mi pirinola</p>
+    </section>
+
+    <section class="panel picker-panel" aria-labelledby="pickerTitle">
+      <h2 id="pickerTitle">Selecciona una flor (Claro no habra ninguna Flor mas linda que tu mi amor )</h2>
+      <div id="flowerPicker" class="flower-picker" role="list"></div>
+      <div id="phraseBox" class="phrase-box" aria-live="polite">
+        <p id="phraseText">Elige una flor para ver una frase 💖</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Overlay de 'noche' que tapa la pantalla; por seguridad empieza oculto -->
+  <div id="nightOverlay" class="night-overlay" hidden aria-hidden="true" role="dialog" aria-label="Noche de flores">
+    <button id="closeNight" class="close-night" aria-label="Salir de la noche">Salir</button>
+    <div class="hint">Toca "Salir", Esc o toca fuera para cerrar</div>
+    <!-- Aquí se irán añadiendo las flores con JS -->
+  </div>
+
+  <footer class="site-footer">
+    <small>Demo móvil • Hecho con cariño 🌷 (Si ay alguna sugerencia dile al desarrollador de esta madre "Tu novio jsjs")</small>
+  </footer>
+
+  <!-- SweetAlert2 (CDN) - cargamos antes del script principal -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="script.js"></script>
+</body>
+</html>
