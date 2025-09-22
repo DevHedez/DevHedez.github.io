@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Portafolio Interactivo - DevHedez</title>
+  <link rel="stylesheet" href="/styles.css">
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+</head>
+<body>
+  <div id="cursor"></div>
+
+  <header class="site-header">
+    <div class="container">
+      <img src="/assets/logo.svg" alt="logo" class="logo">
+      <nav>
+        <a href="#projects">Proyectos</a>
+        <a href="#contact">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-inner">
+        <h1 class="hero-title">Diseño interactivo que destaca tu trabajo</h1>
+        <p class="hero-sub">Prototipo estático con animaciones suaves, interacciones al pasar el cursor y tarjetas dinámicas.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#projects">Ver proyectos</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="projects">
+      <div class="container">
+        <h2 class="section-title">Proyectos</h2>
+        <div class="cards">
+          <article class="card" data-title="Proyecto 1" data-desc="Descripción breve del proyecto 1.">
+            <img src="/assets/project1.svg" alt="Proyecto 1">
+            <h3>Proyecto 1</h3>
+            <p>Web interactiva con microinteracciones.</p>
+            <button class="open-modal">Más</button>
+          </article>
+
+          <article class="card" data-title="Proyecto 2" data-desc="Descripción breve del proyecto 2.">
+            <img src="/assets/project2.svg" alt="Proyecto 2">
+            <h3>Proyecto 2</h3>
+            <p>Landing animada y responsiva.</p>
+            <button class="open-modal">Más</button>
+          </article>
+
+          <article class="card" data-title="Proyecto 3" data-desc="Descripción breve del proyecto 3.">
+            <img src="/assets/project1.svg" alt="Proyecto 3">
+            <h3>Proyecto 3</h3>
+            <p>Integraciones y formularios.</p>
+            <button class="open-modal">Más</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="container">
+        <h2 class="section-title">Contacto</h2>
+        <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
+          <div class="row">
+            <input type="text" name="name" placeholder="Tu nombre" required>
+            <input type="email" name="email" placeholder="Tu email" required>
+          </div>
+          <textarea name="message" rows="5" placeholder="Tu mensaje" required></textarea>
+          <button class="btn" type="submit">Enviar</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© 2025 DevHedez — Prototipo interactivo</div>
+  </footer>
+
+  <!-- Modal -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button id="closeModal" class="modal-close">×</button>
+      <h3 id="modalTitle">Título</h3>
+      <p id="modalBody">Descripción</p>
+    </div>
+  </div>
+
+  <script src="/script.js"></script>
+</body>
+</html>
